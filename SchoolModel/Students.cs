@@ -13,10 +13,16 @@ namespace SchoolModel
 
         public int roll_number { get; set; }
 
-        public List<Subjects> subject;
+       
+        public Class Grade { get; set; }
 
-        public List<Teachers> teacher;
 
-        public Class Grade;
+
+        public List<Subjects> subject { get; set; }
+        //public Teachers teacher { get; set; }
+
+        public ICollection<Teachers> teachers { get; set; }
+
+        
     }
 }

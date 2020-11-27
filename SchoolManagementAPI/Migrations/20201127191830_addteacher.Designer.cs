@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolManagementAPI.DataAccess;
 
 namespace SchoolManagementAPI.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20201127191830_addteacher")]
+    partial class addteacher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +55,14 @@ namespace SchoolManagementAPI.Migrations
                     b.Property<int>("roll_number")
                         .HasColumnType("int");
 
+                    b.Property<int?>("teacherid1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Gradeid");
+
+                    b.HasIndex("teacherid1");
 
                     b.ToTable("Students");
                 });
@@ -70,12 +77,7 @@ namespace SchoolManagementAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentsId")
-                        .HasColumnType("int");
-
                     b.HasKey("id");
-
-                    b.HasIndex("StudentsId");
 
                     b.ToTable("Subject");
                 });
@@ -95,60 +97,24 @@ namespace SchoolManagementAPI.Migrations
                     b.ToTable("teacher");
                 });
 
-            modelBuilder.Entity("StudentsTeachers", b =>
-                {
-                    b.Property<int>("studentsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("teachersteacherid")
-                        .HasColumnType("int");
-
-                    b.HasKey("studentsId", "teachersteacherid");
-
-                    b.HasIndex("teachersteacherid");
-
-                    b.ToTable("StudentsTeachers");
-                });
-
             modelBuilder.Entity("SchoolModel.Students", b =>
                 {
                     b.HasOne("SchoolModel.Class", "Grade")
                         .WithMany("students")
                         .HasForeignKey("Gradeid");
 
+                    b.HasOne("SchoolModel.Teachers", "teacher")
+                        .WithMany()
+                        .HasForeignKey("teacherid1");
+
                     b.Navigation("Grade");
-                });
 
-            modelBuilder.Entity("SchoolModel.Subjects", b =>
-                {
-                    b.HasOne("SchoolModel.Students", null)
-                        .WithMany("subject")
-                        .HasForeignKey("StudentsId");
-                });
-
-            modelBuilder.Entity("StudentsTeachers", b =>
-                {
-                    b.HasOne("SchoolModel.Students", null)
-                        .WithMany()
-                        .HasForeignKey("studentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SchoolModel.Teachers", null)
-                        .WithMany()
-                        .HasForeignKey("teachersteacherid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("teacher");
                 });
 
             modelBuilder.Entity("SchoolModel.Class", b =>
                 {
                     b.Navigation("students");
-                });
-
-            modelBuilder.Entity("SchoolModel.Students", b =>
-                {
-                    b.Navigation("subject");
                 });
 #pragma warning restore 612, 618
         }

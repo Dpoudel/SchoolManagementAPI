@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SchoolManagementAPI.DataAccess;
+using SchoolManagementAPI.InterfaceDefine;
+using SchoolManagementAPI.Interfaceimplement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,7 @@ namespace SchoolManagementAPI
         {
 
             services.AddControllers();
+            services.AddScoped<IStudentInterface, StudentRepo>();
             services.AddDbContext<StudentContext>(options => 
                                        options.UseSqlServer(Configuration.GetConnectionString("StudentConnection")));
             services.AddSwaggerGen(c =>
