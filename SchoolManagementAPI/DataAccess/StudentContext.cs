@@ -15,7 +15,7 @@ namespace SchoolManagementAPI.DataAccess
 
         }
 
-        public DbSet<Students> Student { get; set; }
+        public DbSet<Students> Students { get; set; }
 
         public DbSet<Teachers> teacher { get; set; }
         public DbSet<Class> Grade { get; set; }
