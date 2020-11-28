@@ -11,10 +11,6 @@ namespace SchoolModel
         public int teacherid { get; set; }
         public string FullName { get; set; }
 
-        // public Subjects subject;
-
-        //public int Gradeid { get;set }
-        //public ICollection<Class> Grade { get; set; }
-        public ICollection<Students> students { get; set; }
+      
     }
 }

@@ -11,7 +11,7 @@ namespace SchoolModel
         public int Gradeid { get; set; }
         public int Grade { get; set; }
 
-        public ICollection<Students> students { get; set; }
+        
 
     }
 }

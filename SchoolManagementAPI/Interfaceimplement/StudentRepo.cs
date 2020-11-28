@@ -42,9 +42,7 @@ namespace SchoolManagementAPI.Interfaceimplement
                 result.FirstName = student.FirstName;
                 result.LastName = student.LastName;
                 result.roll_number = student.roll_number;
-                //result.subject = student.subject;
-                //result.teacher = student.teacher;
-                result.Grade = student.Grade;
+               
 
                 await _studentContext.SaveChangesAsync();
 
